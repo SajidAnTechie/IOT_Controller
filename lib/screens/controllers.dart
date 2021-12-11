@@ -29,9 +29,13 @@ class _ControllerState extends State<Controller> {
           SizedBox(
             height: 10,
           ),
-          Icon(_isLightOn ? Icons.lightbulb : Icons.lightbulb_outline,
-              size: 50,
-              color: _isLightOn ? Colors.yellow : Colors.grey.shade400),
+          Image(
+            image: AssetImage(
+              _isLightOn ? "assets/bulb2.png" : "assets/bulb1.png",
+            ),
+            height: 50,
+            fit: BoxFit.cover,
+          ),
           SizedBox(
             height: 10,
           ),
