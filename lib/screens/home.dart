@@ -20,9 +20,9 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.brown.shade900,
+      backgroundColor: Colors.grey.shade900,
       appBar: AppBar(
-        backgroundColor: Colors.brown.shade900,
+        backgroundColor: Colors.grey.shade900,
         elevation: 0,
       ),
       body: Column(
@@ -42,7 +42,7 @@ class _HomeState extends State<Home> {
                   ),
                   CircleAvatar(
                     radius: 30.0,
-                    backgroundColor: Colors.brown.shade800,
+                    backgroundColor: Colors.grey.shade800,
                     child: const Text('SA'),
                   )
                 ],
@@ -51,7 +51,7 @@ class _HomeState extends State<Home> {
                 alignment: Alignment.centerLeft,
                 child: Text("Sajid Ansari",
                     style: TextStyle(
-                        color: Colors.grey.shade400,
+                        color: Colors.grey.shade500,
                         fontSize: 15,
                         fontWeight: FontWeight.bold)),
               ),
@@ -97,13 +97,13 @@ class _HomeState extends State<Home> {
             label: 'Settings',
           ),
         ],
-        backgroundColor: Colors.brown.shade900,
+        backgroundColor: Colors.grey.shade900,
         currentIndex: _setIndex,
         selectedItemColor: Colors.white,
         selectedIconTheme: IconThemeData(size: 40),
         selectedLabelStyle: TextStyle(fontWeight: FontWeight.bold),
         elevation: 0,
-        unselectedItemColor: Colors.grey.shade400,
+        unselectedItemColor: Colors.grey.shade500,
         mouseCursor: SystemMouseCursors.grab,
         onTap: (value) {
           onItemTab(value);
