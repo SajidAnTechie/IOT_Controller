@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iotcontroller/screens/controllers.dart';
+import 'package:iotcontroller/screens/model/controller.dart';
 
 class Home extends StatefulWidget {
   const Home({Key key}) : super(key: key);
@@ -74,9 +75,10 @@ class _HomeState extends State<Home> {
                     mainAxisSpacing: 10,
                     crossAxisSpacing: 10,
                   ),
-                  itemCount: 10,
+                  itemCount: controllerLists.length,
                   itemBuilder: (ctx, index) {
-                    return Controller();
+                    final controller = controllerLists[index];
+                    return Controller(controller: controller);
                   }),
             ),
           ),
