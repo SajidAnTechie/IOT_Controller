@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:iotcontroller/screens/home.dart';
+import 'package:iotcontroller/screens/login.dart';
 
 void main() {
   runApp(IotController());
@@ -13,7 +13,7 @@ class IotController extends StatelessWidget {
     return MaterialApp(
       title: "IOT Controller",
       theme: ThemeData(primaryColor: Colors.white),
-      home: Home(),
+      home: Login(),
     );
   }
 }

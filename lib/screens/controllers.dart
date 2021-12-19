@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:iotcontroller/screens/model/controller.dart';
+import 'package:iotcontroller/model/controller.dart';
 
 class Controller extends StatefulWidget {
   final ControllerModel controller;
