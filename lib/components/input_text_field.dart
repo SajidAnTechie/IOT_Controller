@@ -24,22 +24,22 @@ class InputTextField extends StatelessWidget {
               fontWeight: FontWeight.bold,
               fontSize: 13,
             ),
-            icon: Icon(
+            prefixIcon: Icon(
               icon,
               color: kPrimaryColor,
             ),
             hintText: hintText,
             enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(16),
+                borderRadius: BorderRadius.circular(29),
                 borderSide: BorderSide(color: kPrimaryColor)),
             focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(16),
+                borderRadius: BorderRadius.circular(29),
                 borderSide: BorderSide(color: kPrimaryColor)),
             errorBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(16),
+                borderRadius: BorderRadius.circular(29),
                 borderSide: BorderSide(color: Colors.red[400])),
             focusedErrorBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(16),
+                borderRadius: BorderRadius.circular(29),
                 borderSide: BorderSide(color: Colors.red[400]))),
       ),
     );

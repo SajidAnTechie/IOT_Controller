@@ -33,7 +33,7 @@ class _InputPasswordFieldState extends State<InputPasswordField> {
               fontSize: 13,
             ),
             hintText: widget.hintText,
-            icon: Icon(
+            prefixIcon: Icon(
               Icons.lock,
               color: kPrimaryColor,
             ),
@@ -48,16 +48,16 @@ class _InputPasswordFieldState extends State<InputPasswordField> {
               color: kPrimaryColor,
             ),
             enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(16),
+                borderRadius: BorderRadius.circular(29),
                 borderSide: BorderSide(color: kPrimaryColor)),
             focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(16),
+                borderRadius: BorderRadius.circular(29),
                 borderSide: BorderSide(color: kPrimaryColor)),
             errorBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(16),
+                borderRadius: BorderRadius.circular(29),
                 borderSide: BorderSide(color: Colors.red[400])),
             focusedErrorBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(16),
+                borderRadius: BorderRadius.circular(29),
                 borderSide: BorderSide(color: Colors.red[400]))),
       ),
     );
