@@ -33,7 +33,7 @@ class _LoginState extends State<Login> {
       setState(() {
         _isAsyncCall = false;
       });
-      Navigator.pushNamed(context, '/home');
+      Navigator.pushNamedAndRemoveUntil(context, '/home', (route) => false);
     });
   }
 

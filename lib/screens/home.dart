@@ -23,9 +23,9 @@ class _HomeState extends State<Home> {
     return Scaffold(
       backgroundColor: Colors.grey.shade900,
       appBar: AppBar(
-        backgroundColor: Colors.grey.shade900,
-        elevation: 0,
-      ),
+          backgroundColor: Colors.grey.shade900,
+          elevation: 0,
+          automaticallyImplyLeading: false),
       body: Column(
         children: [
           Padding(
