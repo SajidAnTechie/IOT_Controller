@@ -4,6 +4,8 @@ import 'package:iotcontroller/components/backgrount.dart';
 import 'package:iotcontroller/components/rounded_button.dart';
 import 'package:iotcontroller/components/input_text_field.dart';
 import 'package:iotcontroller/components/input_password_field.dart';
+import 'package:iotcontroller/screens/home.dart';
+import 'package:iotcontroller/validators/login.dart';
 
 class Login extends StatefulWidget {
   const Login({Key key}) : super(key: key);
@@ -14,32 +16,13 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
   final _formKey = GlobalKey<FormState>();
-  UserModel user = new UserModel();
-
-  String _validateEmail(String value) {
-    if (value == null || value.isEmpty) {
-      return "Email is required.";
-    }
-
-    const pattern = r'^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$';
-    final regExp = RegExp(pattern);
-
-    if (!regExp.hasMatch(value)) {
-      return "Please enter the valid email.";
-    }
-    return null;
-  }
-
-  String _validatePassword(String value) {
-    if (value == null || value.isEmpty) {
-      return "Password is required.";
-    }
-    return null;
-  }
+  String email;
+  String password;
 
   Future<void> _submit() async {
-    UserModel body = UserModel(email: user.email, password: user.password);
+    UserModel body = UserModel(email: email, password: password);
     print(body);
+    Navigator.push(context, MaterialPageRoute(builder: (ctx) => Home()));
   }
 
   @override
@@ -54,14 +37,14 @@ class _LoginState extends State<Login> {
               children: [
                 InputTextField(
                     hintText: "Enter Email",
-                    onChanged: (value) => {user.email = value},
+                    onChanged: (value) => {email = value},
                     icon: Icons.email,
-                    validator: _validateEmail),
+                    validator: LoginValidator.validateEmail),
                 InputPasswordField(
                     hintText: "Enter Password",
-                    onChanged: (value) => {user.password = value},
+                    onChanged: (value) => {password = value},
                     icon: Icons.lock,
-                    validator: _validatePassword),
+                    validator: LoginValidator.validatePassword),
                 RoundedButton(
                   press: () {
                     if (_formKey.currentState.validate()) {
