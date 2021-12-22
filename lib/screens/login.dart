@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:iotcontroller/model/user.dart';
+import 'package:iotcontroller/model/login.dart';
 import 'package:iotcontroller/components/backgrount.dart';
 import 'package:iotcontroller/components/rounded_button.dart';
 import 'package:iotcontroller/components/input_text_field.dart';
@@ -28,7 +28,7 @@ class _LoginState extends State<Login> {
       _isAsyncCall = true;
     });
     Future.delayed(Duration(seconds: 2), () {
-      UserModel body = UserModel(email: email, password: password);
+      LoginModel body = LoginModel(email: email, password: password);
       print(body);
       setState(() {
         _isAsyncCall = false;
