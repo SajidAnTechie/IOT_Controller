@@ -5,6 +5,7 @@ import 'package:iotcontroller/components/rounded_button.dart';
 import 'package:iotcontroller/components/input_text_field.dart';
 import 'package:iotcontroller/components/input_password_field.dart';
 import 'package:iotcontroller/screens/home.dart';
+import 'package:iotcontroller/services/login.dart';
 import 'package:iotcontroller/validators/login.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 
@@ -27,14 +28,40 @@ class _LoginState extends State<Login> {
     setState(() {
       _isAsyncCall = true;
     });
-    Future.delayed(Duration(seconds: 2), () {
-      LoginModel body = LoginModel(email: email, password: password);
-      print(body);
+    final body = LoginModel(email: email, password: password);
+
+    try {
+      final response = await LoginService.login(body);
+
+      if (response) {
+        Navigator.pushNamedAndRemoveUntil(context, '/home', (route) => false);
+      }
+    } catch (err) {
+      print(err);
+      showDialog(
+          context: context,
+          builder: (ctx) => AlertDialog(
+                elevation: 5,
+                content: Text("Incorrect email/password"),
+                actions: [
+                  FloatingActionButton(onPressed: () {}, child: Text("Ok")),
+                ],
+                shape: CircleBorder(),
+              ));
+    } finally {
       setState(() {
         _isAsyncCall = false;
       });
-      Navigator.pushNamedAndRemoveUntil(context, '/home', (route) => false);
-    });
+    }
+
+    // Future.delayed(Duration(seconds: 2), () {
+    //   final body = LoginModel(email: email, password: password);
+    //   print(body);
+    //   setState(() {
+    //     _isAsyncCall = false;
+    //   });
+    //   Navigator.pushNamedAndRemoveUntil(context, '/home', (route) => false);
+    // });
   }
 
   @override
