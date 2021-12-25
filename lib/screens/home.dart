@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:iotcontroller/screens/controllers.dart';
 import 'package:iotcontroller/model/controller.dart';
+import 'package:iotcontroller/screens/controllers.dart';
 
 class Home extends StatefulWidget {
   const Home({Key key}) : super(key: key);
