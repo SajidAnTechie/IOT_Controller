@@ -52,15 +52,6 @@ class _LoginState extends State<Login> {
         _isAsyncCall = false;
       });
     }
-
-    // Future.delayed(Duration(seconds: 2), () {
-    //   final body = LoginModel(email: email, password: password);
-    //   print(body);
-    //   setState(() {
-    //     _isAsyncCall = false;
-    //   });
-    //   Navigator.pushNamedAndRemoveUntil(context, '/home', (route) => false);
-    // });
   }
 
   @override
