@@ -32,7 +32,7 @@ class _LoginState extends State<Login> {
 
     try {
       final response = await LoginService.login(body);
-
+      print(response.email);
       if (response != null) {
         Navigator.pushNamedAndRemoveUntil(context, '/home', (route) => false);
       }
@@ -42,10 +42,16 @@ class _LoginState extends State<Login> {
           context: context,
           builder: (ctx) => AlertDialog(
                 elevation: 5,
-                content: Text("Incorrect email/password"),
+                content: Text("Incorrect email/password."),
                 actions: [
-                  FloatingActionButton(onPressed: () {}, child: Text("Ok")),
+                  TextButton(
+                      onPressed: () {
+                        Navigator.pop(context, 'OK');
+                      },
+                      child: Text("Ok")),
                 ],
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(20))),
               ));
     } finally {
       setState(() {
