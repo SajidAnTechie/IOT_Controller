@@ -33,7 +33,7 @@ class _LoginState extends State<Login> {
     try {
       final response = await LoginService.login(body);
 
-      if (response) {
+      if (response != null) {
         Navigator.pushNamedAndRemoveUntil(context, '/home', (route) => false);
       }
     } catch (err) {
@@ -46,7 +46,6 @@ class _LoginState extends State<Login> {
                 actions: [
                   FloatingActionButton(onPressed: () {}, child: Text("Ok")),
                 ],
-                shape: CircleBorder(),
               ));
     } finally {
       setState(() {

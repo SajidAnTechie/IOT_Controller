@@ -1,4 +1,4 @@
 class Config {
-  static String baseURL = 'http://localhost:5000/api/v1/';
-  static String authLogin = 'auth/login';
+  static String baseURL = '10.0.2.2:5000';
+  static String authLogin = '/api/v1/auth/login';
 }

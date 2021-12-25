@@ -9,7 +9,7 @@ class LoginService {
   static var client = http.Client();
   //request server for login
 
-  static Future<bool> login(LoginModel model) async {
+  static Future<UserModel> login(LoginModel model) async {
     Map<String, String> requestHeaders = {'Content-Type': 'application/json'};
 
     var url = Uri.http(Config.baseURL, Config.authLogin);
@@ -17,12 +17,6 @@ class LoginService {
     final response = await client.post(url,
         headers: requestHeaders, body: jsonEncode(model.toJson()));
 
-    print(response);
-    if (response.statusCode == 200) {
-      return true;
-    } else {
-      return false;
-    }
-    //return loginResponseMapToDart(response.body);
+    return loginResponseMapToDart(response.body);
   }
 }
