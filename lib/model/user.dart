@@ -13,6 +13,6 @@ class UserModel {
   }
 }
 
-UserModel loginResponseMapToDart(String str) {
+UserModel loginResponseJson(String str) {
   return UserModel.fromJson(jsonDecode(str));
 }

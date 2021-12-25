@@ -17,6 +17,6 @@ class LoginService {
     final response = await client.post(url,
         headers: requestHeaders, body: jsonEncode(model.toJson()));
 
-    return loginResponseMapToDart(response.body);
+    return loginResponseJson(response.body); // map json data to dart model.
   }
 }
