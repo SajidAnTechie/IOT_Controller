@@ -32,7 +32,7 @@ class _LoginState extends State<Login> {
 
     try {
       final response = await LoginService.login(body);
-      print(response.email);
+
       if (response != null) {
         Navigator.pushNamedAndRemoveUntil(context, '/home', (route) => false);
       }

@@ -1,21 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:iotcontroller/screens/home.dart';
 import 'package:iotcontroller/screens/login.dart';
+import 'package:iotcontroller/config/appConfig.dart';
+import 'package:iotcontroller/services/shared_cache.dart';
 
-void main() {
+Widget defaultWidget = const Login();
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  bool isLoggedIn = await SharedCache.isKeyExit(Config.apiCachedLoginKey);
+
+  if (isLoggedIn) {
+    defaultWidget = Home();
+  }
   runApp(IotController());
 }
 
 class IotController extends StatelessWidget {
   const IotController({Key key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: "IOT Controller",
       theme: ThemeData(primaryColor: Colors.white),
-      initialRoute: '/',
-      routes: {'/': (context) => Login(), '/home': (context) => Home()},
+      home: defaultWidget,
+      routes: {'/home': (context) => Home()},
     );
   }
 }

@@ -14,6 +14,9 @@ class UserModel {
     return UserModel(
         id: data.id, name: data.name, email: data.email, token: data.token);
   }
+  Map<String, dynamic> toJson() {
+    return {'id': id, 'name': name, 'email': email, 'token': token};
+  }
 }
 
 UserModel loginResponseJson(String str) {
