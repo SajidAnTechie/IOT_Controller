@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:iotcontroller/providers/appliance_provider.dart';
 import 'package:iotcontroller/screens/home.dart';
 import 'package:iotcontroller/screens/login.dart';
 import 'package:iotcontroller/config/appConfig.dart';
 import 'package:iotcontroller/services/shared_cache.dart';
-import 'package:provider/provider.dart';
 
 Widget defaultWidget = const Login();
 void main() async {
