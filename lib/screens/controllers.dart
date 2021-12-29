@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:iotcontroller/model/controller.dart';
+import 'package:iotcontroller/model/appliance.dart';
 
 class Controller extends StatefulWidget {
-  final ControllerModel controller;
-  const Controller({this.controller, Key key}) : super(key: key);
+  final ApplianceData appliance;
+  const Controller({this.appliance, Key key}) : super(key: key);
 
   @override
   _ControllerState createState() => _ControllerState();
@@ -32,8 +32,8 @@ class _ControllerState extends State<Controller> {
             height: 10,
           ),
           Image(
-            image: AssetImage(
-              _isLightOn ? widget.controller.img1 : widget.controller.img2,
+            image: NetworkImage(
+              _isLightOn ? widget.appliance.image2 : widget.appliance.image1,
             ),
             height: 50,
             fit: BoxFit.cover,
@@ -41,7 +41,7 @@ class _ControllerState extends State<Controller> {
           SizedBox(
             height: 10,
           ),
-          Text(widget.controller.name,
+          Text(widget.appliance.name,
               style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
           Text("Whitenoise",
               style: TextStyle(
@@ -49,7 +49,7 @@ class _ControllerState extends State<Controller> {
                   color: Colors.grey.shade400,
                   fontWeight: FontWeight.bold)),
           Switch(
-              value: _isLightOn,
+              value: widget.appliance.isOn,
               activeColor: Colors.yellow,
               inactiveThumbColor: Colors.grey.shade200,
               inactiveTrackColor: Colors.grey.shade400,

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:iotcontroller/model/controller.dart';
-import 'package:iotcontroller/model/user.dart';
+import 'package:iotcontroller/providers/appliance_provider.dart';
 import 'package:iotcontroller/screens/controllers.dart';
-import 'package:iotcontroller/services/shared_cache.dart';
+import 'package:provider/provider.dart';
 
 class Home extends StatefulWidget {
   const Home({Key key}) : super(key: key);
@@ -13,16 +12,23 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   int _setIndex = 0;
-  UserModel data;
+  bool _isInit = true;
+  Future _fetchData;
 
-  void onItemTab(int index) {
+  void onItemTab(value) {
     setState(() {
-      _setIndex = index;
+      _setIndex = value;
     });
   }
 
-  Future<void> _somethin() async {
-    data = await SharedCache.getLoginDetails(context);
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (_isInit) {
+      _fetchData = Provider.of<ApplianceProvider>(context, listen: false)
+          .getAuthAppliances(context);
+    }
+    _isInit = false;
   }
 
   @override
@@ -34,78 +40,82 @@ class _HomeState extends State<Home> {
           elevation: 0,
           automaticallyImplyLeading: false),
       body: FutureBuilder(
-          future: _somethin(),
+          future: _fetchData,
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             return snapshot.connectionState == ConnectionState.waiting
                 ? Center(child: CircularProgressIndicator())
-                : Column(
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 25),
-                        child: Column(children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                "Welcome Home",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 28,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              CircleAvatar(
-                                radius: 30.0,
-                                backgroundColor: Colors.grey.shade800,
-                                child: const Text('SA'),
-                              )
-                            ],
-                          ),
-                          Align(
-                            alignment: Alignment.centerLeft,
-                            child: Text(data.data.name,
-                                style: TextStyle(
-                                    color: Colors.grey.shade500,
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.bold)),
-                          ),
-                        ]),
-                      ),
-                      SizedBox(
-                        height: 50,
-                      ),
-                      Expanded(
-                        child: Container(
-                          decoration: BoxDecoration(
-                              color: Colors.grey.shade100,
-                              // boxShadow: [
-                              //   BoxShadow(
-                              //     color: Colors.grey.withOpacity(0.5),
-                              //     spreadRadius: 5,
-                              //     blurRadius: 7,
-                              //     offset: Offset(0, 3), // changes position of shadow
-                              //   ),
-                              // ],
-                              borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(20),
-                                  topRight: Radius.circular(20))),
-                          child: GridView.builder(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 20, vertical: 30),
-                              gridDelegate:
-                                  SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 2,
-                                mainAxisSpacing: 10,
-                                crossAxisSpacing: 10,
-                              ),
-                              itemCount: controllerLists.length,
-                              itemBuilder: (ctx, index) {
-                                final controller = controllerLists[index];
-                                return Controller(controller: controller);
-                              }),
+                : Consumer<ApplianceProvider>(builder: (context, data, child) {
+                    final authData = data.authData.data;
+                    final applianceList = data.applianceList.data;
+                    return Column(
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 25),
+                          child: Column(children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  "Welcome Home",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 28,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                CircleAvatar(
+                                  radius: 30.0,
+                                  backgroundColor: Colors.grey.shade800,
+                                  child: const Text('SA'),
+                                )
+                              ],
+                            ),
+                            Align(
+                              alignment: Alignment.centerLeft,
+                              child: Text(authData.name,
+                                  style: TextStyle(
+                                      color: Colors.grey.shade500,
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold)),
+                            ),
+                          ]),
                         ),
-                      ),
-                    ],
-                  );
+                        SizedBox(
+                          height: 50,
+                        ),
+                        Expanded(
+                          child: Container(
+                            decoration: BoxDecoration(
+                                color: Colors.grey.shade100,
+                                // boxShadow: [
+                                //   BoxShadow(
+                                //     color: Colors.grey.withOpacity(0.5),
+                                //     spreadRadius: 5,
+                                //     blurRadius: 7,
+                                //     offset: Offset(0, 3), // changes position of shadow
+                                //   ),
+                                // ],
+                                borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(20),
+                                    topRight: Radius.circular(20))),
+                            child: GridView.builder(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 20, vertical: 30),
+                                gridDelegate:
+                                    SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 2,
+                                  mainAxisSpacing: 10,
+                                  crossAxisSpacing: 10,
+                                ),
+                                itemCount: applianceList.length,
+                                itemBuilder: (ctx, index) {
+                                  final appliance = applianceList[index];
+                                  return Controller(appliance: appliance);
+                                }),
+                          ),
+                        ),
+                      ],
+                    );
+                  });
           }),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
