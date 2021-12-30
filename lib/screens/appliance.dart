@@ -3,7 +3,9 @@ import 'package:iotcontroller/model/appliance.dart';
 
 class Controller extends StatefulWidget {
   final ApplianceData appliance;
-  const Controller({this.appliance, Key key}) : super(key: key);
+  final Function toogleSwitch;
+  const Controller({this.appliance, this.toogleSwitch, Key key})
+      : super(key: key);
 
   @override
   _ControllerState createState() => _ControllerState();
@@ -13,9 +15,7 @@ class _ControllerState extends State<Controller> {
   bool _isLightOn = false;
 
   void toogleSwitch(bool value) {
-    setState(() {
-      _isLightOn = value;
-    });
+    widget.toogleSwitch(value, widget.appliance.id);
   }
 
   @override
@@ -33,7 +33,9 @@ class _ControllerState extends State<Controller> {
           ),
           Image(
             image: NetworkImage(
-              _isLightOn ? widget.appliance.image2 : widget.appliance.image1,
+              widget.appliance.isOn
+                  ? widget.appliance.image2
+                  : widget.appliance.image1,
             ),
             height: 50,
             fit: BoxFit.cover,

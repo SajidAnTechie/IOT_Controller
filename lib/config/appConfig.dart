@@ -3,4 +3,5 @@ class Config {
   static String authLogin = '/api/v1/auth/login';
   static String apiCachedLoginKey = 'user_info';
   static String authAppliace = '/api/v1/appliance/auth';
+  static String updateAppliance = '/api/v1/appliance/updateState';
 }

@@ -19,4 +19,20 @@ class ApplianceService {
 
     return applianceList;
   }
+
+  static Future<ApplianceData> updateSwitchState(
+      String data, String token) async {
+    Map<String, String> requestHeaders = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer $token'
+    };
+
+    var url = Uri.http(Config.baseURL, Config.updateAppliance);
+
+    final response = await client.put(url, body: data, headers: requestHeaders);
+    final updatedAppliance =
+        applianceResponse(response.body); // map json data to dart model.
+    print(updatedAppliance.data.isOn);
+    return updatedAppliance.data;
+  }
 }
