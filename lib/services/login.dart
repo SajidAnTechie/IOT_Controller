@@ -13,7 +13,7 @@ class LoginService {
   static Future<UserModel> login(LoginModel model) async {
     Map<String, String> requestHeaders = {'Content-Type': 'application/json'};
 
-    var url = Uri.http(Config.baseURL, Config.authLogin);
+    var url = Uri.https(Config.baseURL, Config.authLogin);
 
     final response = await client.post(url,
         headers: requestHeaders, body: jsonEncode(model.toJson()));

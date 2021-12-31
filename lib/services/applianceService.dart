@@ -11,7 +11,7 @@ class ApplianceService {
       'Authorization': 'Bearer $token'
     };
 
-    var url = Uri.http(Config.baseURL, Config.authAppliace);
+    var url = Uri.https(Config.baseURL, Config.authAppliace);
 
     final response = await client.get(url, headers: requestHeaders);
     final applianceList =
@@ -27,7 +27,7 @@ class ApplianceService {
       'Authorization': 'Bearer $token'
     };
 
-    var url = Uri.http(Config.baseURL, Config.updateAppliance);
+    var url = Uri.https(Config.baseURL, Config.updateAppliance);
 
     final response = await client.put(url, body: data, headers: requestHeaders);
     final updatedAppliance =
