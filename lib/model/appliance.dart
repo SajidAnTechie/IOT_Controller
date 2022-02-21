@@ -21,31 +21,30 @@ ApplianceModel applianceListResponse(String str) {
 class ApplianceData {
   String id;
   String name;
+  int power;
   int pin;
   String image1;
   String image2;
   bool isOn;
-  String timeLapsed;
 
-  ApplianceData({
-    this.id,
-    this.name,
-    this.pin,
-    this.image1,
-    this.image2,
-    this.isOn,
-    this.timeLapsed,
-  });
+  ApplianceData(
+      {this.id,
+      this.name,
+      this.power,
+      this.pin,
+      this.image1,
+      this.image2,
+      this.isOn});
 
   factory ApplianceData.fromJson(Map<String, dynamic> json) {
     return ApplianceData(
         id: json['_id'],
         name: json['name'],
+        power: json['power'],
         pin: json['pin'],
         image1: json['image1'],
         image2: json['image2'],
-        isOn: json['isOn'],
-        timeLapsed: json['timeLapsed'] != null ? json['timeLapsed'] : "");
+        isOn: json['isOn']);
   }
 }
 

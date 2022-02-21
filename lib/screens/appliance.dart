@@ -20,6 +20,7 @@ class _ControllerState extends State<Controller> {
 
   @override
   Widget build(BuildContext context) {
+    final power = widget.appliance.power;
     return Card(
       color: Colors.grey.shade200,
       elevation: 4,
@@ -45,7 +46,7 @@ class _ControllerState extends State<Controller> {
           ),
           Text(widget.appliance.name,
               style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
-          Text("Whitenoise",
+          Text("$power W",
               style: TextStyle(
                   fontSize: 20,
                   color: Colors.grey.shade400,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iotcontroller/model/toogle_switch_request.dart';
+import 'package:iotcontroller/services/shared_cache.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:provider/provider.dart';
 import 'package:iotcontroller/screens/appliance.dart';
@@ -18,7 +19,11 @@ class _HomeState extends State<Home> {
   bool _isInit = true;
   Future _fetchData;
 
-  void onItemTab(value) {
+  Future<void> onItemTab(value) async {
+    if (value == 2) {
+      await SharedCache.logout(context);
+      return;
+    }
     setState(() {
       _setIndex = value;
     });
@@ -40,8 +45,8 @@ class _HomeState extends State<Home> {
       _isAsyncCall = true;
     });
     try {
-      Provider.of<ApplianceProvider>(context, listen: false)
-          .upadateSwitchState(requestData);
+      await Provider.of<ApplianceProvider>(context, listen: false)
+          .upadateSwitchState(context, requestData);
     } catch (err) {
       print(err);
       showDialog(
@@ -135,22 +140,26 @@ class _HomeState extends State<Home> {
                                   borderRadius: BorderRadius.only(
                                       topLeft: Radius.circular(20),
                                       topRight: Radius.circular(20))),
-                              child: GridView.builder(
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: 20, vertical: 30),
-                                  gridDelegate:
-                                      SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount: 2,
-                                    mainAxisSpacing: 10,
-                                    crossAxisSpacing: 10,
-                                  ),
-                                  itemCount: applianceList.length,
-                                  itemBuilder: (ctx, index) {
-                                    final appliance = applianceList[index];
-                                    return Controller(
-                                        appliance: appliance,
-                                        toogleSwitch: toogleSwitch);
-                                  }),
+                              child: _setIndex == 0
+                                  ? GridView.builder(
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: 20, vertical: 30),
+                                      gridDelegate:
+                                          SliverGridDelegateWithFixedCrossAxisCount(
+                                        crossAxisCount: 2,
+                                        mainAxisSpacing: 10,
+                                        crossAxisSpacing: 10,
+                                      ),
+                                      itemCount: applianceList.length,
+                                      itemBuilder: (ctx, index) {
+                                        final appliance = applianceList[index];
+                                        return Controller(
+                                            appliance: appliance,
+                                            toogleSwitch: toogleSwitch);
+                                      })
+                                  : Center(
+                                      child: Text("Dashboard"),
+                                    ),
                             ),
                           ),
                         ],
@@ -172,8 +181,8 @@ class _HomeState extends State<Home> {
             label: 'Dashboard',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: 'Settings',
+            icon: Icon(Icons.logout),
+            label: 'Log out',
           ),
         ],
         backgroundColor: Colors.grey.shade900,

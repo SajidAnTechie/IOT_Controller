@@ -28,10 +28,11 @@ class IotController extends StatelessWidget {
         })
       ],
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: "IOT Controller",
         theme: ThemeData(primaryColor: Colors.white),
         home: defaultWidget,
-        routes: {'/home': (context) => Home()},
+        routes: {'/home': (context) => Home(), '/login': (context) => Login()},
       ),
     );
   }
