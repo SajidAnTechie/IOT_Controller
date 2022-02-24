@@ -15,7 +15,7 @@ class ApplianceLogModel {
 
 class ApplianceLogData {
   String name;
-  int totalPowerConsumed;
+  String totalPowerConsumed;
   int pin;
   String image;
   int power;
@@ -26,7 +26,7 @@ class ApplianceLogData {
   factory ApplianceLogData.fromJson(Map<String, dynamic> json) {
     return ApplianceLogData(
         name: json['name'],
-        totalPowerConsumed: json['totalPowerConsumed'],
+        totalPowerConsumed: json['totalPowerConsumed'].toString(),
         pin: json['pin'],
         image: json['image'],
         power: json['power']);

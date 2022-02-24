@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:iotcontroller/providers/appliance_log_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:iotcontroller/providers/appliance_provider.dart';
 import 'package:iotcontroller/screens/home.dart';
@@ -27,6 +28,9 @@ class IotController extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (BuildContext context) {
           return ApplianceProvider();
+        }),
+        ChangeNotifierProvider(create: (BuildContext context) {
+          return ApplianceLogProvider();
         })
       ],
       child: MaterialApp(

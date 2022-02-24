@@ -14,10 +14,9 @@ class ApplianceService {
     var url = Uri.https(Config.baseURL, Config.authAppliace);
 
     final response = await client.get(url, headers: requestHeaders);
-    final applianceList =
-        applianceListResponse(response.body); // map json data to dart model.
 
-    return applianceList;
+    return applianceListResponse(
+        response.body); // map json data to dart model.;
   }
 
   static Future<ApplianceData> updateSwitchState(
@@ -32,7 +31,7 @@ class ApplianceService {
     final response = await client.put(url, body: data, headers: requestHeaders);
     final updatedAppliance =
         applianceResponse(response.body); // map json data to dart model.
-    print(updatedAppliance.data.isOn);
+
     return updatedAppliance.data;
   }
 }

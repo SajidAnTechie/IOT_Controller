@@ -1,26 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:iotcontroller/model/appliance.dart';
+import 'package:iotcontroller/model/toogle_switch_request.dart';
 
-class Controller extends StatefulWidget {
+class Controller extends StatelessWidget {
   final ApplianceData appliance;
   final Function toogleSwitch;
   const Controller({this.appliance, this.toogleSwitch, Key key})
       : super(key: key);
 
-  @override
-  _ControllerState createState() => _ControllerState();
-}
-
-class _ControllerState extends State<Controller> {
-  bool _isLightOn = false;
-
-  void toogleSwitch(bool value) {
-    widget.toogleSwitch(value, widget.appliance.id);
+  void toogleSwitchHandler(bool value) {
+    toogleSwitch(value, appliance.id);
   }
 
   @override
   Widget build(BuildContext context) {
-    final power = widget.appliance.power;
+    final power = appliance.power;
     return Card(
       color: Colors.grey.shade200,
       elevation: 4,
@@ -34,9 +28,7 @@ class _ControllerState extends State<Controller> {
           ),
           Image(
             image: NetworkImage(
-              widget.appliance.isOn
-                  ? widget.appliance.image2
-                  : widget.appliance.image1,
+              appliance.isOn ? appliance.image2 : appliance.image1,
             ),
             height: 50,
             fit: BoxFit.cover,
@@ -44,7 +36,7 @@ class _ControllerState extends State<Controller> {
           SizedBox(
             height: 10,
           ),
-          Text(widget.appliance.name,
+          Text(appliance.name,
               style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
           Text("$power W",
               style: TextStyle(
@@ -52,11 +44,11 @@ class _ControllerState extends State<Controller> {
                   color: Colors.grey.shade400,
                   fontWeight: FontWeight.bold)),
           Switch(
-              value: widget.appliance.isOn,
+              value: appliance.isOn,
               activeColor: Colors.yellow,
               inactiveThumbColor: Colors.grey.shade200,
               inactiveTrackColor: Colors.grey.shade400,
-              onChanged: toogleSwitch)
+              onChanged: toogleSwitchHandler)
         ]),
       ),
     );

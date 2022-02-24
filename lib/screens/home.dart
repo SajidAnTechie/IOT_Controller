@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iotcontroller/model/toogle_switch_request.dart';
+import 'package:iotcontroller/providers/appliance_log_provider.dart';
+import 'package:iotcontroller/screens/dashboard.dart';
 import 'package:iotcontroller/services/shared_cache.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:provider/provider.dart';
@@ -35,6 +37,8 @@ class _HomeState extends State<Home> {
     if (_isInit) {
       _fetchData = Provider.of<ApplianceProvider>(context, listen: false)
           .getAuthAppliances(context);
+      _fetchData = Provider.of<ApplianceLogProvider>(context, listen: false)
+          .getApplianceLogData(context);
     }
     _isInit = false;
   }
@@ -127,40 +131,30 @@ class _HomeState extends State<Home> {
                           ),
                           Expanded(
                             child: Container(
-                              decoration: BoxDecoration(
-                                  color: Colors.grey.shade100,
-                                  // boxShadow: [
-                                  //   BoxShadow(
-                                  //     color: Colors.grey.withOpacity(0.5),
-                                  //     spreadRadius: 5,
-                                  //     blurRadius: 7,
-                                  //     offset: Offset(0, 3), // changes position of shadow
-                                  //   ),
-                                  // ],
-                                  borderRadius: BorderRadius.only(
-                                      topLeft: Radius.circular(20),
-                                      topRight: Radius.circular(20))),
-                              child: _setIndex == 0
-                                  ? GridView.builder(
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: 20, vertical: 30),
-                                      gridDelegate:
-                                          SliverGridDelegateWithFixedCrossAxisCount(
-                                        crossAxisCount: 2,
-                                        mainAxisSpacing: 10,
-                                        crossAxisSpacing: 10,
-                                      ),
-                                      itemCount: applianceList.length,
-                                      itemBuilder: (ctx, index) {
-                                        final appliance = applianceList[index];
-                                        return Controller(
-                                            appliance: appliance,
-                                            toogleSwitch: toogleSwitch);
-                                      })
-                                  : Center(
-                                      child: Text("Dashboard"),
-                                    ),
-                            ),
+                                decoration: BoxDecoration(
+                                    color: Colors.grey.shade100,
+                                    borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(20),
+                                        topRight: Radius.circular(20))),
+                                child: _setIndex == 0
+                                    ? GridView.builder(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 20, vertical: 30),
+                                        gridDelegate:
+                                            SliverGridDelegateWithFixedCrossAxisCount(
+                                          crossAxisCount: 2,
+                                          mainAxisSpacing: 10,
+                                          crossAxisSpacing: 10,
+                                        ),
+                                        itemCount: applianceList.length,
+                                        itemBuilder: (ctx, index) {
+                                          final appliance =
+                                              applianceList[index];
+                                          return Controller(
+                                              appliance: appliance,
+                                              toogleSwitch: toogleSwitch);
+                                        })
+                                    : Dashboard()),
                           ),
                         ],
                       );
