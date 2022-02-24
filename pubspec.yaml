@@ -32,6 +32,7 @@ dependencies:
   http: ^0.12.2
   api_cache_manager: ^1.0.2
   provider: ^6.0.1
+  animated_splash_screen: ^1.2.0
 
 dev_dependencies:
   flutter_test:

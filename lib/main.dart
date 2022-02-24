@@ -5,6 +5,8 @@ import 'package:iotcontroller/screens/home.dart';
 import 'package:iotcontroller/screens/login.dart';
 import 'package:iotcontroller/config/appConfig.dart';
 import 'package:iotcontroller/services/shared_cache.dart';
+import 'package:animated_splash_screen/animated_splash_screen.dart';
+import 'package:page_transition/page_transition.dart';
 
 Widget defaultWidget = const Login();
 void main() async {
@@ -31,7 +33,13 @@ class IotController extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: "IOT Controller",
         theme: ThemeData(primaryColor: Colors.white),
-        home: defaultWidget,
+        home: AnimatedSplashScreen(
+          duration: 3000,
+          splash: Image.asset("assets/images/logo.png"),
+          nextScreen: defaultWidget,
+          splashTransition: SplashTransition.fadeTransition,
+          pageTransitionType: PageTransitionType.fade,
+        ),
         routes: {'/home': (context) => Home(), '/login': (context) => Login()},
       ),
     );
