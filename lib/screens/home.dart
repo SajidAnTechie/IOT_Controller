@@ -5,6 +5,7 @@ import 'package:iotcontroller/screens/appliance.dart';
 import 'package:iotcontroller/services/shared_cache.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:month_picker_dialog/month_picker_dialog.dart';
+import 'package:iotcontroller/components/ShowAlertDialog.dart';
 import 'package:iotcontroller/model/toogle_switch_request.dart';
 import 'package:iotcontroller/providers/appliance_provider.dart';
 import 'package:iotcontroller/providers/appliance_log_provider.dart';
@@ -45,31 +46,21 @@ class _HomeState extends State<Home> {
     _isInit = false;
   }
 
-  Future<void> toogleSwitch(bool isOn, String id) async {
+  Future<void> toggleSwitch(bool isOn, String id) async {
     ToogleSwitch requestData = ToogleSwitch(id: id, isOn: isOn);
     setState(() {
       _isAsyncCall = true;
     });
     try {
       await Provider.of<ApplianceProvider>(context, listen: false)
-          .upadateSwitchState(context, requestData);
+          .updateSwitchState(context, requestData);
     } catch (err) {
       print(err);
       showDialog(
           context: context,
-          builder: (ctx) => AlertDialog(
-                elevation: 5,
-                content: Text("Something went wrong !!!"),
-                actions: [
-                  TextButton(
-                      onPressed: () {
-                        Navigator.pop(context, 'OK');
-                      },
-                      child: Text("Ok")),
-                ],
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(20))),
-              ));
+          builder: (ctx) =>
+              ShowAlertDialog(errorMessage: "Something went wrong !!!"),
+          barrierDismissible: false);
     } finally {
       setState(() {
         _isAsyncCall = false;
@@ -89,19 +80,9 @@ class _HomeState extends State<Home> {
       print(err);
       showDialog(
           context: context,
-          builder: (ctx) => AlertDialog(
-                elevation: 5,
-                content: Text("Something went wrong !!!"),
-                actions: [
-                  TextButton(
-                      onPressed: () {
-                        Navigator.pop(context, 'OK');
-                      },
-                      child: Text("Ok")),
-                ],
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(20))),
-              ));
+          builder: (ctx) =>
+              ShowAlertDialog(errorMessage: "Something went wrong !!!"),
+          barrierDismissible: false);
     } finally {
       setState(() {
         _isAsyncCall = false;
@@ -186,7 +167,7 @@ class _HomeState extends State<Home> {
                                               applianceList[index];
                                           return Controller(
                                               appliance: appliance,
-                                              toogleSwitch: toogleSwitch);
+                                              toggleSwitch: toggleSwitch);
                                         })
                                     : Dashboard(initialDate: initialDate)),
                           ),

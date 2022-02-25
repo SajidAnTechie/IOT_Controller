@@ -4,12 +4,12 @@ import 'package:iotcontroller/model/toogle_switch_request.dart';
 
 class Controller extends StatelessWidget {
   final ApplianceData appliance;
-  final Function toogleSwitch;
-  const Controller({this.appliance, this.toogleSwitch, Key key})
+  final Function toggleSwitch;
+  const Controller({this.appliance, this.toggleSwitch, Key key})
       : super(key: key);
 
-  void toogleSwitchHandler(bool value) {
-    toogleSwitch(value, appliance.id);
+  void toggleSwitchHandler(bool value) {
+    toggleSwitch(value, appliance.id);
   }
 
   @override
@@ -48,7 +48,7 @@ class Controller extends StatelessWidget {
               activeColor: Colors.yellow,
               inactiveThumbColor: Colors.grey.shade200,
               inactiveTrackColor: Colors.grey.shade400,
-              onChanged: toogleSwitchHandler)
+              onChanged: toggleSwitchHandler)
         ]),
       ),
     );

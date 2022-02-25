@@ -5,6 +5,7 @@ import 'package:iotcontroller/validators/login.dart';
 import 'package:iotcontroller/components/backgrount.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:iotcontroller/components/rounded_button.dart';
+import 'package:iotcontroller/components/ShowAlertDialog.dart';
 import 'package:iotcontroller/components/input_text_field.dart';
 import 'package:iotcontroller/components/input_password_field.dart';
 
@@ -39,19 +40,9 @@ class _LoginState extends State<Login> {
       print(err);
       showDialog(
           context: context,
-          builder: (ctx) => AlertDialog(
-                elevation: 5,
-                content: Text("Incorrect email/password."),
-                actions: [
-                  TextButton(
-                      onPressed: () {
-                        Navigator.pop(context, 'OK');
-                      },
-                      child: Text("Ok")),
-                ],
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(20))),
-              ));
+          builder: (ctx) =>
+              ShowAlertDialog(errorMessage: "Incorrect email/password."),
+          barrierDismissible: false);
     } finally {
       setState(() {
         _isAsyncCall = false;

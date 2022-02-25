@@ -16,7 +16,7 @@ class LoginService {
     var url = Uri.https(Config.baseURL, Config.authLogin);
 
     final response = await client.post(url,
-        headers: requestHeaders, body: jsonEncode(model.toJson()));
+        headers: requestHeaders, body: jsonEncode(model));
 
     final loginDetails = loginResponseJson(response.body);
 

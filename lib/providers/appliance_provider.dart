@@ -40,12 +40,10 @@ class ApplianceProvider with ChangeNotifier {
     }
   }
 
-  Future<void> upadateSwitchState(
+  Future<void> updateSwitchState(
       BuildContext context, ToogleSwitch model) async {
-    //final authData = await SharedCache.getLoginDetails(context);
-
     final response = await ApplianceService.updateSwitchState(
-        jsonEncode(model.toJson()), authData.data.token);
+        jsonEncode(model), authData.data.token);
     final index =
         _applianceList.data.indexWhere((appliacne) => model.id == appliacne.id);
     _applianceList.data[index] = response;
