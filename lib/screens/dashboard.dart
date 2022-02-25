@@ -14,8 +14,9 @@ class Dashboard extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Center(child: Text("Appliances Logs")),
+          Text("Appliances Logs"),
           SizedBox(
             height: 50,
           ),
@@ -23,20 +24,26 @@ class Dashboard extends StatelessWidget {
           Consumer<ApplianceLogProvider>(builder: (context, data, child) {
             final appliancelogs = data.applianceLogData.data;
 
-            return Expanded(
-              child: ListView.separated(
-                itemCount: appliancelogs.length,
-                itemBuilder: (ctx, index) {
-                  final appliance = appliancelogs[index];
-                  return ListTile(
-                    leading: Image.network(appliance.image, height: 50),
-                    title: Text(appliance.name),
-                    trailing: Text(appliance.totalPowerConsumed + " units"),
+            return appliancelogs.isEmpty
+                ? Center(
+                    child: Text(
+                        "You have no logs for ${initialDate.year}/${initialDate.month}."),
+                  )
+                : Expanded(
+                    child: ListView.separated(
+                      itemCount: appliancelogs.length,
+                      itemBuilder: (ctx, index) {
+                        final appliance = appliancelogs[index];
+                        return ListTile(
+                          leading: Image.network(appliance.image, height: 50),
+                          title: Text(appliance.name),
+                          trailing:
+                              Text(appliance.totalPowerConsumed + " units"),
+                        );
+                      },
+                      separatorBuilder: (context, index) => Divider(),
+                    ),
                   );
-                },
-                separatorBuilder: (context, index) => Divider(),
-              ),
-            );
           }),
         ],
       ),

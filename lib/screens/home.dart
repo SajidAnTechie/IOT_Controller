@@ -40,7 +40,7 @@ class _HomeState extends State<Home> {
       _fetchData = Provider.of<ApplianceProvider>(context, listen: false)
           .getAuthAppliances(context);
       _fetchData = Provider.of<ApplianceLogProvider>(context, listen: false)
-          .getApplianceLogData(context);
+          .getApplianceLogData(context, initialDate);
     }
     _isInit = false;
   }
@@ -53,6 +53,38 @@ class _HomeState extends State<Home> {
     try {
       await Provider.of<ApplianceProvider>(context, listen: false)
           .upadateSwitchState(context, requestData);
+    } catch (err) {
+      print(err);
+      showDialog(
+          context: context,
+          builder: (ctx) => AlertDialog(
+                elevation: 5,
+                content: Text("Something went wrong !!!"),
+                actions: [
+                  TextButton(
+                      onPressed: () {
+                        Navigator.pop(context, 'OK');
+                      },
+                      child: Text("Ok")),
+                ],
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(20))),
+              ));
+    } finally {
+      setState(() {
+        _isAsyncCall = false;
+      });
+    }
+  }
+
+  Future<void> getAppliancesLogsByDate(DateTime selectedDate) async {
+    setState(() {
+      _isAsyncCall = true;
+      initialDate = selectedDate;
+    });
+    try {
+      await Provider.of<ApplianceLogProvider>(context, listen: false)
+          .getApplianceLogData(context, selectedDate);
     } catch (err) {
       print(err);
       showDialog(
@@ -206,9 +238,7 @@ class _HomeState extends State<Home> {
                         locale: Locale("en"),
                       ).then((date) {
                         if (date != null) {
-                          setState(() {
-                            initialDate = date;
-                          });
+                          getAppliancesLogsByDate(date);
                         }
                       });
                     },

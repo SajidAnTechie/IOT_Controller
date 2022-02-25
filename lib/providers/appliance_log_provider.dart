@@ -11,11 +11,12 @@ class ApplianceLogProvider with ChangeNotifier {
 
   ApplianceLogModel get applianceLogData => _applianceLogData;
 
-  Future<void> getApplianceLogData(BuildContext context) async {
+  Future<void> getApplianceLogData(
+      BuildContext context, DateTime selectedDate) async {
     try {
       authData = await SharedCache.getLoginDetails(context);
-      _applianceLogData =
-          await ApplianceLogServices.getApplianceLog(authData.data.token);
+      _applianceLogData = await ApplianceLogServices.getApplianceLog(
+          authData.data.token, selectedDate.toString());
     } catch (err) {
       print(err);
       showDialog(
