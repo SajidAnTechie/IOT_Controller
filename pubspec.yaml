@@ -33,6 +33,7 @@ dependencies:
   api_cache_manager: ^1.0.2
   provider: ^6.0.1
   animated_splash_screen: ^1.2.0
+  month_picker_dialog: ^0.4.0
 
 dev_dependencies:
   flutter_test:

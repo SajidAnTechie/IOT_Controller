@@ -2,28 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:iotcontroller/providers/appliance_log_provider.dart';
 
-class Dashboard extends StatefulWidget {
+class Dashboard extends StatelessWidget {
+  final DateTime initialDate;
   const Dashboard({
+    this.initialDate,
     Key key,
   }) : super(key: key);
 
-  @override
-  _DashboardState createState() => _DashboardState();
-}
-
-class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
       child: Column(
         children: [
-          Container(
-            child: Center(child: Text("Appliances Logs")),
-          ),
+          Center(child: Text("Appliances Logs")),
           SizedBox(
             height: 50,
           ),
+          Text('${initialDate.year}/${initialDate.month}'),
           Consumer<ApplianceLogProvider>(builder: (context, data, child) {
             final appliancelogs = data.applianceLogData.data;
 

@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:iotcontroller/model/toogle_switch_request.dart';
-import 'package:iotcontroller/providers/appliance_log_provider.dart';
+import 'package:provider/provider.dart';
 import 'package:iotcontroller/screens/dashboard.dart';
+import 'package:iotcontroller/screens/appliance.dart';
 import 'package:iotcontroller/services/shared_cache.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
-import 'package:provider/provider.dart';
-import 'package:iotcontroller/screens/appliance.dart';
+import 'package:month_picker_dialog/month_picker_dialog.dart';
+import 'package:iotcontroller/model/toogle_switch_request.dart';
 import 'package:iotcontroller/providers/appliance_provider.dart';
+import 'package:iotcontroller/providers/appliance_log_provider.dart';
 
 class Home extends StatefulWidget {
   const Home({Key key}) : super(key: key);
@@ -20,6 +21,7 @@ class _HomeState extends State<Home> {
   bool _isAsyncCall = false;
   bool _isInit = true;
   Future _fetchData;
+  DateTime initialDate = DateTime.now();
 
   Future<void> onItemTab(value) async {
     if (value == 2) {
@@ -154,7 +156,7 @@ class _HomeState extends State<Home> {
                                               appliance: appliance,
                                               toogleSwitch: toogleSwitch);
                                         })
-                                    : Dashboard()),
+                                    : Dashboard(initialDate: initialDate)),
                           ),
                         ],
                       );
@@ -191,6 +193,27 @@ class _HomeState extends State<Home> {
           onItemTab(value);
         },
       ),
+      floatingActionButton: _setIndex == 1
+          ? Builder(
+              builder: (context) => FloatingActionButton(
+                    child: Icon(Icons.calendar_today),
+                    onPressed: () async {
+                      showMonthPicker(
+                        context: context,
+                        firstDate: DateTime(DateTime.now().year - 2, 5),
+                        lastDate: DateTime(DateTime.now().year, 9),
+                        initialDate: initialDate,
+                        locale: Locale("en"),
+                      ).then((date) {
+                        if (date != null) {
+                          setState(() {
+                            initialDate = date;
+                          });
+                        }
+                      });
+                    },
+                  ))
+          : Container(),
     );
   }
 }
