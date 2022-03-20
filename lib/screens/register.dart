@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:iotcontroller/constants/colors.dart';
 import 'package:iotcontroller/model/login.dart';
+import 'package:iotcontroller/model/register.dart';
 import 'package:iotcontroller/services/login.dart';
+import 'package:iotcontroller/services/register.dart';
 import 'package:iotcontroller/validators/inputField.dart';
 import 'package:iotcontroller/components/backgrount.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
@@ -31,21 +33,19 @@ class _RegisterState extends State<Register> {
     setState(() {
       _isAsyncCall = true;
     });
-    final body = LoginModel(email: email, password: password);
+    final body = RegisterModel(
+        name: username, email: email, password: password, address: address);
 
     try {
-      final response = await LoginService.login(body);
+      final response = await RegisterService.register(body);
 
       if (response != null) {
-        Navigator.pushNamedAndRemoveUntil(context, '/home', (route) => false);
+        Navigator.pushNamedAndRemoveUntil(
+            context, '/verify-email', (route) => false);
       }
     } catch (err) {
       print(err);
-      showDialog(
-          context: context,
-          builder: (ctx) =>
-              ShowAlertDialog(errorMessage: "Incorrect email/password."),
-          barrierDismissible: false);
+      AlertDialogComponent.dialog(context, "Incorrect email/password.");
     } finally {
       setState(() {
         _isAsyncCall = false;

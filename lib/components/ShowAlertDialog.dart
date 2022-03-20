@@ -21,3 +21,12 @@ class ShowAlertDialog extends StatelessWidget {
     );
   }
 }
+
+class AlertDialogComponent {
+  static Future<String> dialog(BuildContext context, String message) {
+    return showDialog(
+        context: context,
+        builder: (ctx) => ShowAlertDialog(errorMessage: message),
+        barrierDismissible: false);
+  }
+}

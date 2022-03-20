@@ -56,11 +56,7 @@ class _HomeState extends State<Home> {
           .updateSwitchState(context, requestData);
     } catch (err) {
       print(err);
-      showDialog(
-          context: context,
-          builder: (ctx) =>
-              ShowAlertDialog(errorMessage: "Something went wrong !!!"),
-          barrierDismissible: false);
+      AlertDialogComponent.dialog(context, "Something went wrong !!!");
     } finally {
       setState(() {
         _isAsyncCall = false;
@@ -78,11 +74,7 @@ class _HomeState extends State<Home> {
           .getApplianceLogData(context, selectedDate);
     } catch (err) {
       print(err);
-      showDialog(
-          context: context,
-          builder: (ctx) =>
-              ShowAlertDialog(errorMessage: "Something went wrong !!!"),
-          barrierDismissible: false);
+      AlertDialogComponent.dialog(context, "Something went wrong !!!");
     } finally {
       setState(() {
         _isAsyncCall = false;

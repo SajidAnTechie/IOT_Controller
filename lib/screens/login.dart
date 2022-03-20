@@ -39,11 +39,7 @@ class _LoginState extends State<Login> {
       }
     } catch (err) {
       print(err);
-      showDialog(
-          context: context,
-          builder: (ctx) =>
-              ShowAlertDialog(errorMessage: "Incorrect email/password."),
-          barrierDismissible: false);
+      AlertDialogComponent.dialog(context, "Incorrect email/password.");
     } finally {
       setState(() {
         _isAsyncCall = false;
