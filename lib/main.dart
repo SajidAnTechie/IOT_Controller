@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iotcontroller/providers/appliance_log_provider.dart';
+import 'package:iotcontroller/screens/register.dart';
 import 'package:provider/provider.dart';
 import 'package:iotcontroller/providers/appliance_provider.dart';
 import 'package:iotcontroller/screens/home.dart';
@@ -44,7 +45,11 @@ class IotController extends StatelessWidget {
           splashTransition: SplashTransition.fadeTransition,
           pageTransitionType: PageTransitionType.fade,
         ),
-        routes: {'/home': (context) => Home(), '/login': (context) => Login()},
+        routes: {
+          '/home': (context) => Home(),
+          '/login': (context) => Login(),
+          '/register': (context) => Register()
+        },
       ),
     );
   }

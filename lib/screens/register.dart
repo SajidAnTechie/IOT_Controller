@@ -10,17 +10,19 @@ import 'package:iotcontroller/components/ShowAlertDialog.dart';
 import 'package:iotcontroller/components/input_text_field.dart';
 import 'package:iotcontroller/components/input_password_field.dart';
 
-class Login extends StatefulWidget {
-  const Login({Key key}) : super(key: key);
+class Register extends StatefulWidget {
+  const Register({Key key}) : super(key: key);
 
   @override
-  _LoginState createState() => _LoginState();
+  _RegisterState createState() => _RegisterState();
 }
 
-class _LoginState extends State<Login> {
+class _RegisterState extends State<Register> {
   final _formKey = GlobalKey<FormState>();
   bool _isAsyncCall = false;
   String email;
+  String username;
+  String address;
   String password;
 
   Future<void> _submit() async {
@@ -57,18 +59,28 @@ class _LoginState extends State<Login> {
       body: ModalProgressHUD(
         child: SingleChildScrollView(
           child: BackgroundComponent(
-            headerName: "Login",
+            headerName: "Register",
             child: Form(
               key: _formKey,
               child: Column(
                 children: [
                   InputTextField(
-                      hintText: "Enter Email",
+                      hintText: "Enter Your Username",
+                      onChanged: (value) => {username = value},
+                      icon: Icons.supervised_user_circle,
+                      validator: InputFieldValidator.validateUsernameFiled),
+                  InputTextField(
+                      hintText: "Enter Your Email",
                       onChanged: (value) => {email = value},
                       icon: Icons.email,
                       validator: InputFieldValidator.validateEmailField),
+                  InputTextField(
+                      hintText: "Enter Your Address",
+                      onChanged: (value) => {address = value},
+                      icon: Icons.location_on,
+                      validator: InputFieldValidator.validateAddressFiled),
                   InputPasswordField(
-                      hintText: "Enter Password",
+                      hintText: "Enter Your Password",
                       onChanged: (value) => {password = value},
                       icon: Icons.lock,
                       validator: InputFieldValidator.validatePasswordField),
@@ -81,21 +93,23 @@ class _LoginState extends State<Login> {
                         print("Not ok");
                       }
                     },
-                    text: "Login",
+                    text: "Register",
                   ),
                   Container(
                     padding: EdgeInsets.symmetric(horizontal: 50, vertical: 5),
                     child: Row(children: [
-                      Text("Don't have a account ?",
-                          style: TextStyle(fontSize: 15)),
+                      Text(
+                        "Already have a account ?",
+                        style: TextStyle(fontSize: 15),
+                      ),
                       SizedBox(
                         width: 5,
                       ),
                       InkWell(
                         onTap: () => Navigator.pushNamedAndRemoveUntil(
-                            context, '/register', (route) => false),
+                            context, '/login', (route) => false),
                         child: Text(
-                          "Register",
+                          "Login",
                           style: TextStyle(
                               color: kPrimaryColor,
                               fontWeight: FontWeight.bold,
@@ -103,6 +117,9 @@ class _LoginState extends State<Login> {
                         ),
                       )
                     ]),
+                  ),
+                  SizedBox(
+                    height: 50,
                   )
                 ],
               ),
