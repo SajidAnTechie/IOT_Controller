@@ -144,23 +144,32 @@ class _HomeState extends State<Home> {
                                         topLeft: Radius.circular(20),
                                         topRight: Radius.circular(20))),
                                 child: _setIndex == 0
-                                    ? GridView.builder(
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 20, vertical: 30),
-                                        gridDelegate:
-                                            SliverGridDelegateWithFixedCrossAxisCount(
-                                          crossAxisCount: 2,
-                                          mainAxisSpacing: 10,
-                                          crossAxisSpacing: 10,
-                                        ),
-                                        itemCount: applianceList.length,
-                                        itemBuilder: (ctx, index) {
-                                          final appliance =
-                                              applianceList[index];
-                                          return Controller(
-                                              appliance: appliance,
-                                              toggleSwitch: toggleSwitch);
-                                        })
+                                    ? applianceList.length > 0
+                                        ? GridView.builder(
+                                            padding: EdgeInsets.symmetric(
+                                                horizontal: 20, vertical: 30),
+                                            gridDelegate:
+                                                SliverGridDelegateWithFixedCrossAxisCount(
+                                              crossAxisCount: 2,
+                                              mainAxisSpacing: 10,
+                                              crossAxisSpacing: 10,
+                                            ),
+                                            itemCount: applianceList.length,
+                                            itemBuilder: (ctx, index) {
+                                              final appliance =
+                                                  applianceList[index];
+                                              return Controller(
+                                                  appliance: appliance,
+                                                  toggleSwitch: toggleSwitch);
+                                            })
+                                        : Center(
+                                            child: Text(
+                                                "You have no any appliances register yet.",
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight: FontWeight.bold,
+                                                    color:
+                                                        Colors.grey.shade700)))
                                     : Dashboard(initialDate: initialDate)),
                           ),
                         ],

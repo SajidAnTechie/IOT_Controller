@@ -27,7 +27,11 @@ class Dashboard extends StatelessWidget {
                 ? Expanded(
                     child: Center(
                       child: Text(
-                          "You have no logs for ${initialDate.year}/${initialDate.month}."),
+                          "You have no logs for ${initialDate.year}/${initialDate.month}.",
+                          style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.grey.shade700)),
                     ),
                   )
                 : Expanded(

@@ -34,7 +34,7 @@ class _RegisterState extends State<Register> {
       _isAsyncCall = true;
     });
     final body = RegisterModel(
-        name: username, email: email, password: password, address: address);
+        name: username, email: email, address: address, password: password);
 
     try {
       final response = await RegisterService.register(body);
