@@ -80,7 +80,7 @@ class _ManageScheduleState extends State<ManageSchedule> {
       }
     } catch (err) {
       print(err);
-      AlertDialogComponent.dialog(context, "Incorrect email/password.");
+      AlertDialogComponent.dialog(context, "Something went wrong.");
     } finally {
       setState(() {
         _isAsyncCall = false;
