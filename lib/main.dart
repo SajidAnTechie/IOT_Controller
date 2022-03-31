@@ -38,7 +38,7 @@ class IotController extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: "Sans Fill",
+        title: "Sans Fil",
         theme: ThemeData(primaryColor: Colors.white),
         home: AnimatedSplashScreen(
           duration: 3000,
