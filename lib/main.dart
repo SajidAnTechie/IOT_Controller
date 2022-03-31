@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:iotcontroller/screens/manage_schedule.dart';
 import 'package:provider/provider.dart';
 import 'package:iotcontroller/screens/home.dart';
 import 'package:iotcontroller/screens/login.dart';
@@ -8,6 +7,7 @@ import 'package:iotcontroller/screens/register.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:iotcontroller/screens/verify_email.dart';
 import 'package:iotcontroller/services/shared_cache.dart';
+import 'package:iotcontroller/screens/manage_schedule.dart';
 import 'package:iotcontroller/providers/appliance_provider.dart';
 import 'package:iotcontroller/providers/appliance_log_provider.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
