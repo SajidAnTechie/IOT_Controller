@@ -13,7 +13,7 @@ class ScheduleService {
       'Authorization': 'Bearer $token'
     };
     var url = Uri.https(Config.baseURL, Config.setSchedule);
-    print(url);
+
     final response = await client.post(url,
         headers: requestHeaders, body: jsonEncode(model));
     return true;
