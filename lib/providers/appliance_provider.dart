@@ -50,4 +50,8 @@ class ApplianceProvider with ChangeNotifier {
 
     notifyListeners();
   }
+
+  ApplianceData getApplianceDataById(String id) {
+    return applianceList.data.firstWhere((appliance) => appliance.id == id);
+  }
 }

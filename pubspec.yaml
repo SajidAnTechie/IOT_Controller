@@ -34,6 +34,7 @@ dependencies:
   animated_splash_screen: ^1.2.0
   month_picker_dialog: ^0.4.0
   pin_code_fields: ^7.3.0
+  flutter_speed_dial: ^3.0.5
 
 dev_dependencies:
   flutter_test:

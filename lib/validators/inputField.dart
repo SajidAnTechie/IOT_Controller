@@ -33,6 +33,25 @@ class InputFieldValidator {
     if (value == null || value.isEmpty) {
       return "Password is required.";
     }
+    if (value.length < 8) {
+      return "Password must be grater or equal to 8 character long.";
+    }
+
+    return null;
+  }
+
+  static String alarmTimeFiled(String value) {
+    if (value == null || value.isEmpty) {
+      return "Time is required.";
+    }
+
+    return null;
+  }
+
+  static String applianceDropDown(String value) {
+    if (value == null || value.isEmpty) {
+      return "Appliance is required.";
+    }
 
     return null;
   }

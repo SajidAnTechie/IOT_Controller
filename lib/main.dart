@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:iotcontroller/screens/manage_schedule.dart';
 import 'package:provider/provider.dart';
 import 'package:iotcontroller/screens/home.dart';
 import 'package:iotcontroller/screens/login.dart';
@@ -50,7 +51,8 @@ class IotController extends StatelessWidget {
           '/home': (context) => Home(),
           '/login': (context) => Login(),
           '/register': (context) => Register(),
-          '/verify-email': (context) => VerifyEmail()
+          '/verify-email': (context) => VerifyEmail(),
+          '/manage-schedule': (context) => ManageSchedule()
         },
       ),
     );
