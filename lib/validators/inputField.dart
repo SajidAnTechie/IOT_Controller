@@ -40,6 +40,14 @@ class InputFieldValidator {
     return null;
   }
 
+  static String validateLoginPasswordField(String value) {
+    if (value == null || value.isEmpty) {
+      return "Password is required.";
+    }
+
+    return null;
+  }
+
   static String alarmTimeFiled(String value) {
     if (value == null || value.isEmpty) {
       return "Time is required.";

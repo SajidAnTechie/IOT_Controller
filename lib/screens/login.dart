@@ -67,7 +67,8 @@ class _LoginState extends State<Login> {
                       hintText: "Enter Password",
                       onChanged: (value) => {password = value},
                       icon: Icons.lock,
-                      validator: InputFieldValidator.validatePasswordField),
+                      validator:
+                          InputFieldValidator.validateLoginPasswordField),
                   RoundedButton(
                     press: () {
                       if (_formKey.currentState.validate()) {
